@@ -8,6 +8,7 @@ import 'reset-css'
 import './styles/index.scss'
 import { Quasar } from 'quasar'
 import 'quasar/dist/quasar.css'
+import './styles/index.scss'
 
 import App from './App.vue'
 import store from './store'

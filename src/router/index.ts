@@ -11,14 +11,6 @@ const router = createRouter({
 				title: 'Добавление товара',
 			},
 		},
-		{
-			path: '/counter',
-			name: 'counter',
-			component: () => import('../views/counter/index.vue'),
-			meta: {
-				title: 'Добавление товара',
-			},
-		},
 	]
 })
 

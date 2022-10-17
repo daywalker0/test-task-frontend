@@ -11,11 +11,13 @@ const store = useStore();
 		<div class="header__container">
 			<h5 class="page-title">Добавление товара</h5>
 			<div class="q-pa-md">
-				<q-btn-dropdown color="primary" label="Dropdown Button">
+				<q-btn-dropdown label="По умолчанию">
 					<q-list>
 						<q-item clickable v-close-popup>
 							<q-item-section>
-								<q-item-label>от А до Я</q-item-label>
+								<q-item-label>- По цене min (от меньшего к большему)</q-item-label>
+								<q-item-label>- По цене max (от большего к меньшему).</q-item-label>
+								<q-item-label>- По наименованию.</q-item-label>
 							</q-item-section>
 						</q-item>
 					</q-list>
@@ -35,13 +37,34 @@ const store = useStore();
 	}
 }
 .page-title {
-	font-family: 'Source Sans Pro';
+	font-family: SourceSansPro;
 	font-weight: 600;
 	font-size: 28px;
 	line-height: 35px;
 	color: #3F3F3F;
 }
-.q-pa-md {
+.q-btn__content > span {
+	font-family: SourceSansPro;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 15px;
+	color: #B4B4B4;
 }
-
+.q-btn-dropdown {
+	font-family: SourceSansPro;
+	text-transform: none;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 15px;
+	color: #B4B4B4;
+	background: #FFFEFB;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	&::before {
+		box-shadow: none;
+	}
+}
+.q-btn-dropdown__arrow {
+	font-size: 15px;
+}
 </style>

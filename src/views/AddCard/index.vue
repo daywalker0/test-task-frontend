@@ -12,14 +12,22 @@ const store = useStore();
 <template>
 	<div class="wrapper">
 		<Header />
-		<main class="main">
-			<Form />
-			<CardList />
+		<main class="row main">
+			<div class="col-3">
+				<Form />
+			</div>
+			<div class="col-9">
+				<CardList/>
+			</div>
 		</main>
 	</div>
 </template>
 
 <style scoped lang="scss">
+.wrapper {
+	background: rgba(255, 254, 251, 0.8);
+	padding: 0 0 16px 0;
+}
 .main {
 	padding: 0 32px;
 }
