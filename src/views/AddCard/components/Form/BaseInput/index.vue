@@ -64,11 +64,13 @@ defineProps({
 	position: relative;
 }
 .label::after {
-	content: '•';
+	content: '';
 	position: absolute;
-	color: #FF8484;
-	font-size: 17px;
-	top: -6px;
+	background-color: #FF8484;
+	width: 4px;
+	height: 4px;
+	border-radius: 5px;
+	top: -2px;
 }
 
 form > div:nth-child(2) {
