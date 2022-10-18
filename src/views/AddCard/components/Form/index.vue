@@ -3,6 +3,21 @@ import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { reactive, computed } from "vue";
 import BaseInput from "./BaseInput/index.vue";
+import { onMounted, ref } from "vue";
+
+const cardsData = ref([]);
+
+
+const getCards = async () => {
+  return fetch("https://api.escuelajs.co/api/v1/products").then((response) =>
+    response.json()
+  );
+};
+onMounted(() => {
+  getCards().then((data) => {
+    cardsData.value = data;
+  });
+});
 
 const formData = reactive({
 	name: "",
@@ -50,6 +65,13 @@ const submitForm = async () => {
 							</span>
 						</div>
 					</div>
+					<div
+						@click="cardsData.splice(index, 1)"
+						class="card-delete"
+						href="#"
+					>
+						<img src="/trash.svg" alt="delete" />
+					</div>
 				</div>
 			</article>
 		</li>
@@ -57,10 +79,6 @@ const submitForm = async () => {
 	}	else {
 		alert("Ошибка, форма не заполнена!")
 	}
-	formData.name = ''
-	formData.descr = ''
-	formData.price = ''
-	formData.link = ''
 }
 </script>
 
