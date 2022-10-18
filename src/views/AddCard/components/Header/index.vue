@@ -1,12 +1,26 @@
 <script setup lang="ts">
+const categories = [
+	{name: 'По умолчанию', value: 'ALL'},
+	{name: 'По цене min (от меньшего к большему)', value: 'min'},
+	{name: 'По цене max (от большего к меньшему)', value: 'max'},
+	{name: 'По наименованию', value: 'names'},
+]
+const selected = 'По умолчанию'
+
+function sortByCategories() {
+}
 </script>
 
 <template>
   <div class="header">
     <div class="header__container">
       <h5 class="page-title">Добавление товара</h5>
-			<select class="sort-select">
-				<option value="free" selected>По умолчанию</option>
+			<select
+				:selected="selected"
+				:options="categories"
+				@select="sortByCategories(options)"
+				class="sort-select">
+				<option value="free">По умолчанию</option>
 				<option value="starter">По цене min (от меньшего к большему) </option>
 				<option value="professional">По цене max (от большего к меньшему)</option>
 				<option value="corporate">По наименованию</option>
@@ -84,5 +98,20 @@
 		padding: 10px 16px;
 	}
 }
-
+@media all and (max-width: 704px) {
+	.sort-select {
+		max-width: 130px;
+		align-self: flex-start;
+	}
+}
+@media all and (max-width: 375px) {
+	.sort-select {
+		max-width: 130px;
+		align-self: flex-start;
+	}
+	.form {
+		margin-right: 0;
+		margin-bottom: 25px;
+	}
+}
 </style>

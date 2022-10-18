@@ -21,7 +21,7 @@ onMounted(() => {
       <li
         v-for="(card, index) in cardsData"
         :key="index"
-        class="card-item col-4 col-xl-3"
+        class="card-item"
       >
         <article>
           <div class="card-item__wrap">
@@ -124,7 +124,22 @@ onMounted(() => {
     padding: 8px;
   }
 }
-.card-item {
-	width: 32.3% !important;
+ul {
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+	padding-inline-start: 0;
+}
+
+@media all and (max-width: 768px) {
+	.cardlist__wrap {
+		gap: 20px 40px;
+	}
+}
+@media all and (max-width: 704px) {
+	.card-item {
+		max-width: 100%;
+	}
 }
 </style>

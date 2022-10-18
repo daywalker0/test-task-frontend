@@ -30,7 +30,7 @@ const submitForm = async () => {
 		cardList.insertAdjacentHTML('afterbegin',
 		`
 		<li
-		class="card-item col-4"
+		class="card-item"
 		>
 			<article>
 				<div class="card-item__wrap">
@@ -57,10 +57,10 @@ const submitForm = async () => {
 	}	else {
 		alert("Ошибка, форма не заполнена!")
 	}
-	formData.name = ' '
-	formData.descr = ' '
-	formData.price = ' '
-	formData.link = ' '
+	formData.name = ''
+	formData.descr = ''
+	formData.price = ''
+	formData.link = ''
 }
 </script>
 
@@ -210,6 +210,15 @@ const submitForm = async () => {
   line-height: 10px;
   letter-spacing: -0.02em;
   color: #ff8484;
+}
+
+@media all and (max-width: 1023px) {
+	.form {
+		margin-right: 0;
+		margin-bottom: 25px;
+	}
+}
+@media all and (max-width: 375px) {
 }
 
 </style>

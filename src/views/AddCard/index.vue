@@ -13,10 +13,10 @@ const store = useStore();
 	<div class="wrapper">
 		<Header />
 		<main class="row main">
-			<div class="col-3 col-xl-4">
+			<div class="col-xs-12 col-md-4 col-lg-3">
 				<Form />
 			</div>
-			<div class="col-9 col-xl-8">
+			<div class="col-xs-12 col-md-8 col-lg-9">
 				<CardList/>
 			</div>
 		</main>
