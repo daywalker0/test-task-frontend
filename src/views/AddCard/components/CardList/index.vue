@@ -62,6 +62,7 @@ onMounted(() => {
   }
 }
 .card-item {
+	width: 100%;
   font-family: SourceSansPro;
   cursor: pointer;
   max-width: 332px;

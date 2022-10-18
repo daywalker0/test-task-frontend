@@ -13,7 +13,7 @@ defineProps({
 
 <template>
   <div class="input-wrap">
-    <label v-if="label">{{ label }}</label>
+    <label class="label" v-if="label">{{ label }}</label>
     <input
       type="text"
       :value="modelValue"
@@ -36,17 +36,6 @@ defineProps({
     letter-spacing: -0.02em;
     color: #49485e;
     padding-bottom: 4px;
-    &::before {
-      content: "";
-      display: inline-block;
-      position: relative;
-      width: 4px;
-      height: 4px;
-      background: #ff8484;
-      border-radius: 4px;
-      z-index: 99;
-      top: -6px;
-    }
   }
   input {
 		font-family: SourceSansPro;
@@ -70,22 +59,22 @@ defineProps({
     }
   }
 }
-form > div:nth-child(1) > label::before {
-  right: -108px;
+
+.label {
+	position: relative;
 }
+.label::after {
+	content: '•';
+	position: absolute;
+	color: #FF8484;
+	font-size: 17px;
+	top: -6px;
+}
+
 form > div:nth-child(2) {
 	input {
 		height: 108px;
   }
-	label::before {
-		display: none;
-	}
-}
-form > div:nth-child(3) > label::before {
-  right: -150px;
-}
-form > div:nth-child(4) > label::before {
-  right: -62px;
 }
 input::-webkit-input-placeholder {
   opacity: 1;
