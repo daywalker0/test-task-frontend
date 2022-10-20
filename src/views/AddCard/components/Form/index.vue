@@ -1,23 +1,8 @@
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import { reactive, computed } from "vue";
+import { computed, reactive } from "vue";
 import BaseInput from "./BaseInput/index.vue";
-import { onMounted, ref } from "vue";
-
-const cardsData = ref([]);
-
-
-const getCards = async () => {
-  return fetch("https://api.escuelajs.co/api/v1/products").then((response) =>
-    response.json()
-  );
-};
-onMounted(() => {
-  getCards().then((data) => {
-    cardsData.value = data;
-  });
-});
 
 const formData = reactive({
 	name: "",
@@ -25,6 +10,7 @@ const formData = reactive({
 	link: "",
 	price: "",
 });
+
 
 const disabled = computed(() => {
 	return !formData.name || !formData.link || !formData.price
@@ -75,7 +61,8 @@ const submitForm = async () => {
 				</div>
 			</article>
 		</li>
-		`);
+		`
+		);
 	}	else {
 		alert("Ошибка, форма не заполнена!")
 	}
@@ -228,6 +215,38 @@ const submitForm = async () => {
   line-height: 10px;
   letter-spacing: -0.02em;
   color: #ff8484;
+}
+textarea::-webkit-input-placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+textarea::-moz-placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+textarea:-moz-placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+textarea:-ms-input-placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+textarea:focus::-webkit-input-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+textarea:focus::-moz-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+textarea:focus:-moz-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+textarea:focus:-ms-input-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 @media all and (max-width: 1023px) {
