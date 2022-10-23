@@ -5,49 +5,49 @@ import { computed, reactive } from "vue";
 import BaseInput from "./BaseInput/index.vue";
 
 const formData = reactive({
-	name: "",
-	descr: "",
-	link: "",
-	price: "",
+  name: "",
+  descr: "",
+  link: "",
+  price: "",
 });
 
-
 const disabled = computed(() => {
-	return !formData.name || !formData.link || !formData.price
-})
+  return !formData.name || !formData.link || !formData.price;
+});
 
 const rules = {
-	name: { required },
-	link: { required },
-	price: { required },
+  name: { required },
+  link: { required },
+  price: { required },
 };
 
 const v$ = useVuelidate(rules, formData);
 
 const submitForm = async () => {
-	const result = await v$.value.$validate();
-	if (result) {
-		let cardList = document.querySelector('.cardlist__wrap')
-		cardList.insertAdjacentHTML('afterbegin',
-		`
+  const result = await v$.value.$validate();
+  if (result) {
+    let cardList = document.querySelector(".cardlist__wrap");
+    cardList.insertAdjacentHTML(
+      "afterbegin",
+      `
 		<li
 		class="card-item"
 		>
 			<article>
 				<div class="card-item__wrap">
 					<div class="card-item__img">
-						<img src="${ formData.link }" alt="" />
+						<img src="${formData.link}" alt="" />
 					</div>
 					<div class="card-item__info">
 						<div class="card-item__info_wrap">
 							<span class="card-item__info_title">
-								${ formData.name }
+								${formData.name}
 							</span>
 							<p class="card-item__info_description">
-								${ formData.descr }
+								${formData.descr}
 							</p>
 							<span class="card-item__info_price">
-								${ formData.price } руб.
+								${formData.price} руб.
 							</span>
 						</div>
 					</div>
@@ -62,11 +62,11 @@ const submitForm = async () => {
 			</article>
 		</li>
 		`
-		);
-	}	else {
-		alert("Ошибка, форма не заполнена!")
-	}
-}
+    );
+  } else {
+    alert("Ошибка, форма не заполнена!");
+  }
+};
 </script>
 
 <template>
@@ -250,12 +250,11 @@ textarea:focus:-ms-input-placeholder {
 }
 
 @media all and (max-width: 1023px) {
-	.form {
-		margin-right: 0;
-		margin-bottom: 25px;
-	}
+  .form {
+    margin-right: 0;
+    margin-bottom: 25px;
+  }
 }
 @media all and (max-width: 375px) {
 }
-
 </style>

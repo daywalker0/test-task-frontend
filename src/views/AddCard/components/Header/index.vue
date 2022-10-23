@@ -1,30 +1,59 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
 
 const options = [
-	{ id: 1, value: 'По умолчанию'},
-	{ id: 2, value: 'По наименованию' },
-	{ id: 3, value: 'По цене min (от большего к меньшему)' },
-	{ id: 4, value: 'По цене max (от большего к меньшему)' }
-]
-const selected = ref('По умолчанию')
+  {
+    id: 1,
+    label: "По умолчанию",
+    function: function () {
+      store.dispatch("GET_CARDS_FROM_API");
+    },
+  },
+  {
+    id: 2,
+    label: "По наименованию",
+    function: function () {
+      store.commit("sortItemsByName");
+    },
+  },
+  {
+    id: 3,
+    label: "По цене min (от меньшего к большему)",
+    function: function () {
+      store.commit("sortItemsMin");
+    },
+  },
+  {
+    id: 4,
+    label: "По цене max (от большего к меньшему)",
+    function: function () {
+      store.commit("sortItemsMax");
+    },
+  },
+];
 </script>
 
 <template>
   <div class="header">
     <div class="header__container">
       <h5 class="page-title">Добавление товара</h5>
-      <select
-        v-model="selected"
-        class="sort-select"
-      >
-        <option
-          v-for="(option, index) in options"
-          :key="index"
-        >
-          {{ option.value }}
-        </option>
-      </select>
+      <q-btn-dropdown label="По умолчанию">
+        <q-list>
+          <q-item
+            v-for="(option, id) in options"
+            :key="option.id"
+            clickable
+            v-close-popup
+            @click="option.function"
+          >
+            <q-item-section>
+              <q-item-label>{{ option.label }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
     </div>
   </div>
 </template>
@@ -46,12 +75,8 @@ const selected = ref('По умолчанию')
   line-height: 35px;
   color: #3f3f3f;
 }
-.q-btn__content > span {
-  font-family: SourceSansPro;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  color: #b4b4b4;
+.q-icon {
+  display: none !important;
 }
 .q-btn-dropdown {
   font-family: SourceSansPro;
@@ -67,12 +92,9 @@ const selected = ref('По умолчанию')
     box-shadow: none;
   }
 }
-.q-btn-dropdown__arrow {
-  font-size: 15px;
-}
-
-.sort-select {
+.q-item {
   font-family: SourceSansPro;
+  text-transform: none;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
@@ -80,22 +102,9 @@ const selected = ref('По умолчанию')
   background: #fffefb;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  outline: transparent;
-  border: transparent;
-  padding: 10px 16px;
-  cursor: pointer;
-  option {
-    font-family: SourceSansPro;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    color: #b4b4b4;
-    background: #fffefb;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    outline: transparent;
-    border: transparent;
-    padding: 10px 16px;
+  padding: 10px;
+  &:hover {
+    opacity: 1;
   }
 }
 @media all and (max-width: 704px) {

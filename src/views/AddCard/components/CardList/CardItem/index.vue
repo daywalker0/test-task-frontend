@@ -1,18 +1,8 @@
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { onMounted } from "vue";
-
 const store = useStore();
 
-function GET_CARDS_FROM_API() {
-  store.dispatch("GET_CARDS_FROM_API");
-}
-
-onMounted(() => {
-  GET_CARDS_FROM_API();
-});
-
-const cards = defineProps({
+defineProps({
   image: String,
   title: String,
   description: String,

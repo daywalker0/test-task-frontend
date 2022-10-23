@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-import createPersistedState from 'vuex-persistedstate';
 
 const store = createStore({
 	state: {
@@ -15,19 +14,34 @@ const store = createStore({
 		SET_CARDS_TO_STATE: (state, cardsData) => {
 			state.cardsData = cardsData
 		},
+		sortItemsByName: (state, cardsData) => {
+			const newArray = state.cardsData
+			newArray.sort((a, b) => a.title.localeCompare(b.title))
+		},
+		sortItemsMin: (state, cardsData) => {
+			const newArray = state.cardsData
+			newArray.sort((a,b) => b.price - a.price)
+		},
+		sortItemsMax: (state, cardsData) => {
+			const newArray = state.cardsData
+			newArray.sort((a,b) => a.price - b.price)
+		}
 	},
 	actions: {
-		GET_CARDS_FROM_API({commit}) {
-			return axios("https://api.escuelajs.co/api/v1/products", {
-				method: "GET"
-			})
-			.then((cardsData) => {
-				commit('SET_CARDS_TO_STATE', cardsData.data)
-			})
+		GET_CARDS_FROM_API({ commit }) {
+			const baseURL = "https://api.escuelajs.co/api/v1/products";
+			axios
+				.get(baseURL)
+				.then(cardsData => {
+					commit("SET_CARDS_TO_STATE", cardsData.data);
+				})
+				.catch(e => {
+				console.log(e);
+			});
 		}
 	},
 	modules: {},
-	plugins: [createPersistedState()]
+  plugins: []
 })
 
 export default store

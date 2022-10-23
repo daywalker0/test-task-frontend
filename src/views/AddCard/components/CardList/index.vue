@@ -1,29 +1,33 @@
 <script setup lang="ts">
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import CardItem from "./CardItem/index.vue";
 
 const store = useStore();
 const cardsData = computed(() => store.state.cardsData);
+function GET_CARDS_FROM_API() {
+  store.dispatch("GET_CARDS_FROM_API", 1);
+}
+
+onMounted(() => {
+  GET_CARDS_FROM_API();
+});
 </script>
 
 <template>
   <div class="cardlist">
     <ul class="cardlist__wrap row">
-      <li
-				class="card-item"
-				v-for="(card, index) in cardsData"
-				:key="index">
+      <li class="card-item" v-for="(card, index) in cardsData" :key="index">
         <CardItem
-					:image="card.category.image"
-					:title="card.title"
-					:description="card.description"
-					:price="card.price"
-					:index="card.index"
-				/>
-				<div @click="cardsData.splice(index, 1)" class="card-delete" href="#">
-					<img src="/trash.svg" alt="delete" />
-				</div>
+          :image="card.category.image"
+          :title="card.title"
+          :description="card.description"
+          :price="card.price"
+          :index="card.index"
+        />
+        <div @click="cardsData.splice(index, 1)" class="card-delete" href="#">
+          <img src="/trash.svg" alt="delete" />
+        </div>
       </li>
     </ul>
   </div>
@@ -44,8 +48,8 @@ ul {
 }
 
 .card-item {
-	position: relative;
-	width: 100%;
+  position: relative;
+  width: 100%;
   font-family: SourceSansPro;
   cursor: pointer;
   max-width: 332px;
